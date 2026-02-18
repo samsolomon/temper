@@ -180,13 +180,19 @@ export async function generateTheme(
     }
   }
 
+  return parseToolInput(toolInput);
+}
+
+export function parseToolInput(
+  toolInput: Record<string, unknown>,
+): GenerateResult {
   if (
     !toolInput.light ||
     typeof toolInput.light !== "object" ||
     !toolInput.dark ||
     typeof toolInput.dark !== "object"
   ) {
-    throw new Error("Claude did not return a valid theme. Please try again.");
+    throw new Error("Invalid theme data: missing light or dark color objects.");
   }
 
   const rawLight = toolInput.light as Record<string, unknown>;

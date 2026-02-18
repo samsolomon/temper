@@ -18,7 +18,7 @@ program
 program
   .argument("[prompt]", "Theme prompt for Claude")
   .action((prompt: string | undefined) => {
-    if (prompt) return generate(prompt);
+    if (prompt || !process.stdin.isTTY) return generate(prompt);
     program.help();
   });
 
