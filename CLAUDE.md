@@ -17,6 +17,9 @@ pnpm typecheck      # TypeScript type checking
 - **Lib**: `src/lib/` — claude (API), theme (CSS gen), version (semver), config (I/O)
 - **Constants**: `src/constants/shadcn.ts` — 32 CSS variable names, default OKLCH values, all TypeScript types
 - **Preview**: `src/preview/` — React + Vite app served via programmatic Vite API
+  - Uses `@iconify/react` in API mode for icons (fetched from Iconify CDN, zero bundle cost)
+  - Icons use `lucide:*` prefix by default (shadcn/ui convention), but any of 200+ Iconify sets work
+  - Usage: `<Icon icon="lucide:chevron-left" width="16" height="16" />`
 
 ## Key Patterns
 
@@ -24,6 +27,7 @@ pnpm typecheck      # TypeScript type checking
 - Preview app is copied to `dist/preview/` at build time (not bundled)
 - Theme data flows: theme.json → CSS generation → globals.css output
 - Preview gets live updates via Vite WebSocket custom events
+- Preview icons require internet (Iconify CDN); they fail silently offline
 - API key resolution: TEMPER_API_KEY → ANTHROPIC_API_KEY → ~/.config/temper/config.json → interactive prompt
 
 ## Testing
