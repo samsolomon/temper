@@ -1,0 +1,48 @@
+{
+  "name": "temper",
+  "version": "0.1.0",
+  "description": "CLI tool that uses Claude to iteratively reskin shadcn/ui components via CSS variables",
+  "type": "module",
+  "bin": {
+    "temper": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup && node -e \"fs.cpSync('src/preview','dist/preview',{recursive:true})\"",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "shadcn",
+    "theme",
+    "css",
+    "oklch",
+    "claude",
+    "ai"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.75.0",
+    "@clack/prompts": "^1.0.1",
+    "@vitejs/plugin-react": "^5.1.4",
+    "commander": "^14.0.3",
+    "env-paths": "^4.0.0",
+    "picocolors": "^1.1.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "vite": "^7.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.3",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  }
+}
