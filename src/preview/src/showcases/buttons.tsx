@@ -1,6 +1,6 @@
 import React from "react";
 
-const buttonBase: React.CSSProperties = {
+const base: React.CSSProperties = {
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
@@ -13,96 +13,220 @@ const buttonBase: React.CSSProperties = {
   padding: "0.5rem 1rem",
   border: "none",
   cursor: "pointer",
-  transition: "all 0.15s",
+  transition: "opacity 0.15s",
   height: "2.25rem",
 };
 
-const variants: Record<string, React.CSSProperties> = {
-  default: {
-    ...buttonBase,
-    background: "var(--primary)",
-    color: "var(--primary-foreground)",
-  },
-  secondary: {
-    ...buttonBase,
-    background: "var(--secondary)",
-    color: "var(--secondary-foreground)",
-    border: "1px solid var(--border)",
-  },
-  destructive: {
-    ...buttonBase,
-    background: "var(--destructive)",
-    color: "var(--destructive-foreground)",
-  },
-  outline: {
-    ...buttonBase,
-    background: "transparent",
-    color: "var(--foreground)",
-    border: "1px solid var(--border)",
-  },
-  ghost: {
-    ...buttonBase,
-    background: "transparent",
-    color: "var(--foreground)",
-    border: "1px solid transparent",
-  },
-};
+function Btn({
+  label,
+  style,
+  disabled,
+}: {
+  label: string;
+  style: React.CSSProperties;
+  disabled?: boolean;
+}) {
+  return (
+    <button style={style} disabled={disabled}>
+      {label}
+    </button>
+  );
+}
 
 export function ButtonsShowcase() {
   return (
-    <div className="section">
-      <h2 className="section-title">Buttons</h2>
-      <div className="flex flex-wrap gap-3">
-        {Object.entries(variants).map(([name, style]) => (
-          <button key={name} style={style}>
-            {name.charAt(0).toUpperCase() + name.slice(1)}
-          </button>
-        ))}
-        <button
-          style={{
-            ...buttonBase,
-            background: "var(--primary)",
-            color: "var(--primary-foreground)",
-            opacity: 0.5,
-            cursor: "not-allowed",
-          }}
-          disabled
-        >
-          Disabled
-        </button>
+    <>
+      {/* Variants */}
+      <div className="example-section">
+        <div className="example-label">Variants</div>
+        <div className="example-box">
+          <div className="example-row">
+            <Btn
+              label="Primary"
+              style={{
+                ...base,
+                background: "var(--primary)",
+                color: "var(--primary-foreground)",
+              }}
+            />
+            <Btn
+              label="Secondary"
+              style={{
+                ...base,
+                background: "var(--secondary)",
+                color: "var(--secondary-foreground)",
+                border: "1px solid var(--border)",
+              }}
+            />
+            <Btn
+              label="Destructive"
+              style={{
+                ...base,
+                background: "var(--destructive)",
+                color: "var(--destructive-foreground)",
+              }}
+            />
+            <Btn
+              label="Outline"
+              style={{
+                ...base,
+                background: "transparent",
+                color: "var(--foreground)",
+                border: "1px solid var(--border)",
+              }}
+            />
+            <Btn
+              label="Ghost"
+              style={{
+                ...base,
+                background: "transparent",
+                color: "var(--foreground)",
+              }}
+            />
+            <Btn
+              label="Link"
+              style={{
+                ...base,
+                background: "transparent",
+                color: "var(--primary)",
+                textDecoration: "underline",
+                textUnderlineOffset: "4px",
+              }}
+            />
+          </div>
+        </div>
       </div>
-      <div className="flex flex-wrap gap-3" style={{ marginTop: "0.75rem" }}>
-        <button
-          style={{
-            ...variants.default,
-            height: "2rem",
-            padding: "0.25rem 0.75rem",
-            fontSize: "0.8125rem",
-          }}
-        >
-          Small
-        </button>
-        <button style={variants.default}>Default</button>
-        <button
-          style={{
-            ...variants.default,
-            height: "2.75rem",
-            padding: "0.5rem 2rem",
-          }}
-        >
-          Large
-        </button>
-        <button
-          style={{
-            ...variants.default,
-            width: "2.25rem",
-            padding: 0,
-            borderRadius: "var(--radius)",
-          }}
-        >
-          ⚙
-        </button>
+
+      {/* Sizes */}
+      <div className="example-section">
+        <div className="example-label">Sizes</div>
+        <div className="example-box">
+          <div className="example-row" style={{ alignItems: "center" }}>
+            <Btn
+              label="Small"
+              style={{
+                ...base,
+                background: "var(--primary)",
+                color: "var(--primary-foreground)",
+                height: "2rem",
+                padding: "0 0.75rem",
+                fontSize: "0.8125rem",
+              }}
+            />
+            <Btn
+              label="Default"
+              style={{
+                ...base,
+                background: "var(--primary)",
+                color: "var(--primary-foreground)",
+              }}
+            />
+            <Btn
+              label="Large"
+              style={{
+                ...base,
+                background: "var(--primary)",
+                color: "var(--primary-foreground)",
+                height: "2.75rem",
+                padding: "0 2rem",
+              }}
+            />
+            <Btn
+              label="Icon"
+              style={{
+                ...base,
+                background: "var(--primary)",
+                color: "var(--primary-foreground)",
+                width: "2.25rem",
+                padding: 0,
+              }}
+            />
+          </div>
+        </div>
       </div>
-    </div>
+
+      {/* States */}
+      <div className="example-section">
+        <div className="example-label">States</div>
+        <div className="example-box">
+          <div className="example-row">
+            <Btn
+              label="Default"
+              style={{
+                ...base,
+                background: "var(--primary)",
+                color: "var(--primary-foreground)",
+              }}
+            />
+            <Btn
+              label="Disabled"
+              disabled
+              style={{
+                ...base,
+                background: "var(--primary)",
+                color: "var(--primary-foreground)",
+                opacity: 0.5,
+                cursor: "not-allowed",
+              }}
+            />
+            <Btn
+              label="With Ring"
+              style={{
+                ...base,
+                background: "var(--primary)",
+                color: "var(--primary-foreground)",
+                boxShadow: "0 0 0 2px var(--background), 0 0 0 4px var(--ring)",
+              }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* All on secondary background */}
+      <div className="example-section">
+        <div className="example-label">On muted background</div>
+        <div
+          className="example-box"
+          style={{ background: "var(--muted)" }}
+        >
+          <div className="example-row">
+            <Btn
+              label="Primary"
+              style={{
+                ...base,
+                background: "var(--primary)",
+                color: "var(--primary-foreground)",
+              }}
+            />
+            <Btn
+              label="Secondary"
+              style={{
+                ...base,
+                background: "var(--secondary)",
+                color: "var(--secondary-foreground)",
+                border: "1px solid var(--border)",
+              }}
+            />
+            <Btn
+              label="Outline"
+              style={{
+                ...base,
+                background: "transparent",
+                color: "var(--foreground)",
+                border: "1px solid var(--border)",
+              }}
+            />
+            <Btn
+              label="Destructive"
+              style={{
+                ...base,
+                background: "var(--destructive)",
+                color: "var(--destructive-foreground)",
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

@@ -1,143 +1,259 @@
 import React, { useState } from "react";
 
+const btnPrimary: React.CSSProperties = {
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  background: "var(--primary)",
+  color: "var(--primary-foreground)",
+  border: "none",
+  padding: "0.5rem 1rem",
+  borderRadius: "var(--radius)",
+  fontSize: "0.875rem",
+  fontWeight: 500,
+  fontFamily: "var(--font-sans)",
+  cursor: "pointer",
+};
+
+const btnOutline: React.CSSProperties = {
+  ...btnPrimary,
+  background: "transparent",
+  color: "var(--foreground)",
+  border: "1px solid var(--border)",
+  fontWeight: 400,
+};
+
 export function OverlaysShowcase() {
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [alertDialogOpen, setAlertDialogOpen] = useState(false);
   const [popoverOpen, setPopoverOpen] = useState(false);
 
   return (
-    <div className="section">
-      <h2 className="section-title">Overlays</h2>
-
-      <div className="flex gap-3">
-        {/* Dialog trigger */}
-        <button
-          onClick={() => setDialogOpen(true)}
-          style={{
-            background: "var(--primary)",
-            color: "var(--primary-foreground)",
-            border: "none",
-            padding: "0.5rem 1rem",
-            borderRadius: "var(--radius)",
-            fontSize: "0.875rem",
-            fontWeight: 500,
-            cursor: "pointer",
-          }}
-        >
-          Open Dialog
-        </button>
-
-        {/* Popover trigger */}
-        <div style={{ position: "relative" }}>
-          <button
-            onClick={() => setPopoverOpen(!popoverOpen)}
-            style={{
-              background: "transparent",
-              color: "var(--foreground)",
-              border: "1px solid var(--border)",
-              padding: "0.5rem 1rem",
-              borderRadius: "var(--radius)",
-              fontSize: "0.875rem",
-              cursor: "pointer",
-            }}
-          >
-            Open Popover
+    <>
+      {/* Dialog */}
+      <div className="example-section">
+        <div className="example-label">Dialog</div>
+        <div className="example-box">
+          <button style={btnPrimary} onClick={() => setDialogOpen(true)}>
+            Open Dialog
           </button>
 
-          {popoverOpen && (
+          {dialogOpen && (
             <div
               style={{
-                position: "absolute",
-                top: "calc(100% + 0.5rem)",
-                left: 0,
-                zIndex: 50,
-                background: "var(--popover)",
-                color: "var(--popover-foreground)",
-                border: "1px solid var(--border)",
-                borderRadius: "var(--radius)",
-                padding: "1rem",
-                minWidth: "200px",
-                boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
+                position: "fixed",
+                inset: 0,
+                zIndex: 100,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "rgba(0,0,0,0.5)",
               }}
+              onClick={() => setDialogOpen(false)}
             >
-              <p style={{ fontWeight: 600, fontSize: "0.875rem", marginBottom: "0.25rem" }}>
-                Popover Title
-              </p>
-              <p style={{ fontSize: "0.8125rem", color: "var(--muted-foreground)" }}>
-                This is a popover with some content inside.
-              </p>
+              <div
+                style={{
+                  background: "var(--card)",
+                  color: "var(--card-foreground)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "var(--radius)",
+                  padding: "1.5rem",
+                  maxWidth: "425px",
+                  width: "90%",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.15)",
+                }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <h3 style={{ fontSize: "1.125rem", fontWeight: 600, marginBottom: "0.25rem" }}>
+                  Edit profile
+                </h3>
+                <p style={{ color: "var(--muted-foreground)", fontSize: "0.875rem", marginBottom: "1.25rem" }}>
+                  Make changes to your profile here. Click save when you're done.
+                </p>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginBottom: "1.25rem" }}>
+                  <div>
+                    <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 500, marginBottom: "0.25rem" }}>
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      defaultValue="John Doe"
+                      style={{
+                        width: "100%",
+                        height: "2.25rem",
+                        padding: "0.5rem 0.75rem",
+                        fontSize: "0.875rem",
+                        fontFamily: "var(--font-sans)",
+                        background: "var(--background)",
+                        color: "var(--foreground)",
+                        border: "1px solid var(--input)",
+                        borderRadius: "var(--radius)",
+                        outline: "none",
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 500, marginBottom: "0.25rem" }}>
+                      Username
+                    </label>
+                    <input
+                      type="text"
+                      defaultValue="@johndoe"
+                      style={{
+                        width: "100%",
+                        height: "2.25rem",
+                        padding: "0.5rem 0.75rem",
+                        fontSize: "0.875rem",
+                        fontFamily: "var(--font-sans)",
+                        background: "var(--background)",
+                        color: "var(--foreground)",
+                        border: "1px solid var(--input)",
+                        borderRadius: "var(--radius)",
+                        outline: "none",
+                      }}
+                    />
+                  </div>
+                </div>
+                <div style={{ display: "flex", justifyContent: "flex-end", gap: "0.5rem" }}>
+                  <button style={btnOutline} onClick={() => setDialogOpen(false)}>
+                    Cancel
+                  </button>
+                  <button style={btnPrimary} onClick={() => setDialogOpen(false)}>
+                    Save changes
+                  </button>
+                </div>
+              </div>
             </div>
           )}
         </div>
       </div>
 
-      {/* Dialog */}
-      {dialogOpen && (
-        <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 100,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "rgba(0,0,0,0.5)",
-          }}
-          onClick={() => setDialogOpen(false)}
-        >
-          <div
+      {/* Alert Dialog */}
+      <div className="example-section">
+        <div className="example-label">Alert Dialog</div>
+        <div className="example-box">
+          <button
             style={{
-              background: "var(--card)",
-              color: "var(--card-foreground)",
-              border: "1px solid var(--border)",
-              borderRadius: "var(--radius)",
-              padding: "1.5rem",
-              maxWidth: "425px",
-              width: "90%",
-              boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
+              ...btnPrimary,
+              background: "var(--destructive)",
+              color: "var(--destructive-foreground)",
             }}
-            onClick={(e) => e.stopPropagation()}
+            onClick={() => setAlertDialogOpen(true)}
           >
-            <h3 style={{ fontSize: "1.125rem", fontWeight: 600, marginBottom: "0.25rem" }}>
-              Are you sure?
-            </h3>
-            <p style={{ color: "var(--muted-foreground)", fontSize: "0.875rem", marginBottom: "1.25rem" }}>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </p>
-            <div style={{ display: "flex", justifyContent: "flex-end", gap: "0.5rem" }}>
-              <button
-                onClick={() => setDialogOpen(false)}
+            Delete Account
+          </button>
+
+          {alertDialogOpen && (
+            <div
+              style={{
+                position: "fixed",
+                inset: 0,
+                zIndex: 100,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "rgba(0,0,0,0.5)",
+              }}
+            >
+              <div
                 style={{
-                  background: "transparent",
-                  color: "var(--foreground)",
+                  background: "var(--card)",
+                  color: "var(--card-foreground)",
                   border: "1px solid var(--border)",
-                  padding: "0.5rem 1rem",
                   borderRadius: "var(--radius)",
-                  fontSize: "0.875rem",
-                  cursor: "pointer",
+                  padding: "1.5rem",
+                  maxWidth: "425px",
+                  width: "90%",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.15)",
                 }}
               >
-                Cancel
-              </button>
-              <button
-                onClick={() => setDialogOpen(false)}
-                style={{
-                  background: "var(--destructive)",
-                  color: "var(--destructive-foreground)",
-                  border: "none",
-                  padding: "0.5rem 1rem",
-                  borderRadius: "var(--radius)",
-                  fontSize: "0.875rem",
-                  fontWeight: 500,
-                  cursor: "pointer",
-                }}
-              >
-                Delete
-              </button>
+                <h3 style={{ fontSize: "1.125rem", fontWeight: 600, marginBottom: "0.25rem" }}>
+                  Are you absolutely sure?
+                </h3>
+                <p style={{ color: "var(--muted-foreground)", fontSize: "0.875rem", marginBottom: "1.25rem" }}>
+                  This action cannot be undone. This will permanently delete your
+                  account and remove all data from our servers.
+                </p>
+                <div style={{ display: "flex", justifyContent: "flex-end", gap: "0.5rem" }}>
+                  <button style={btnOutline} onClick={() => setAlertDialogOpen(false)}>
+                    Cancel
+                  </button>
+                  <button
+                    style={{
+                      ...btnPrimary,
+                      background: "var(--destructive)",
+                      color: "var(--destructive-foreground)",
+                    }}
+                    onClick={() => setAlertDialogOpen(false)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
             </div>
+          )}
+        </div>
+      </div>
+
+      {/* Popover */}
+      <div className="example-section">
+        <div className="example-label">Popover</div>
+        <div className="example-box">
+          <div style={{ position: "relative", display: "inline-block" }}>
+            <button style={btnOutline} onClick={() => setPopoverOpen(!popoverOpen)}>
+              Open Popover
+            </button>
+
+            {popoverOpen && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "calc(100% + 0.5rem)",
+                  left: 0,
+                  zIndex: 50,
+                  background: "var(--popover)",
+                  color: "var(--popover-foreground)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "var(--radius)",
+                  padding: "1rem",
+                  width: "280px",
+                  boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
+                }}
+              >
+                <p style={{ fontWeight: 600, fontSize: "0.875rem", marginBottom: "0.25rem" }}>
+                  Dimensions
+                </p>
+                <p style={{ fontSize: "0.8125rem", color: "var(--muted-foreground)", marginBottom: "0.75rem" }}>
+                  Set the dimensions for the layer.
+                </p>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                  {["Width", "Height"].map((label) => (
+                    <div key={label} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                      <label style={{ fontSize: "0.8125rem", width: "3.5rem" }}>{label}</label>
+                      <input
+                        type="text"
+                        defaultValue={label === "Width" ? "100%" : "auto"}
+                        style={{
+                          flex: 1,
+                          height: "2rem",
+                          padding: "0.25rem 0.5rem",
+                          fontSize: "0.8125rem",
+                          fontFamily: "var(--font-sans)",
+                          background: "var(--background)",
+                          color: "var(--foreground)",
+                          border: "1px solid var(--input)",
+                          borderRadius: "var(--radius)",
+                          outline: "none",
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 }
