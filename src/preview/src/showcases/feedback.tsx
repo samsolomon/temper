@@ -99,12 +99,6 @@ export function FeedbackShowcase() {
               <div style={{ height: "0.75rem", width: "70%", borderRadius: "var(--radius)", background: "var(--muted)", animation: "pulse 2s ease-in-out infinite" }} />
             </div>
           </div>
-          <style>{`
-            @keyframes pulse {
-              0%, 100% { opacity: 1; }
-              50% { opacity: 0.5; }
-            }
-          `}</style>
         </div>
       </div>
     </>

@@ -21,6 +21,7 @@ const activeTabStyle: React.CSSProperties = {
 
 export function NavigationShowcase() {
   const [activeTab, setActiveTab] = useState(0);
+  const [activePill, setActivePill] = useState(0);
   const tabs = ["Account", "Security", "Notifications", "Billing"];
 
   return (
@@ -77,6 +78,7 @@ export function NavigationShowcase() {
             {["Overview", "Analytics", "Reports"].map((tab, i) => (
               <button
                 key={tab}
+                onClick={() => setActivePill(i)}
                 style={{
                   padding: "0.375rem 0.75rem",
                   fontSize: "0.8125rem",
@@ -85,9 +87,9 @@ export function NavigationShowcase() {
                   borderRadius: "calc(var(--radius) - 2px)",
                   border: "none",
                   cursor: "pointer",
-                  background: i === 0 ? "var(--background)" : "transparent",
-                  color: i === 0 ? "var(--foreground)" : "var(--muted-foreground)",
-                  boxShadow: i === 0 ? "0 1px 2px rgba(0,0,0,0.06)" : "none",
+                  background: i === activePill ? "var(--background)" : "transparent",
+                  color: i === activePill ? "var(--foreground)" : "var(--muted-foreground)",
+                  boxShadow: i === activePill ? "0 1px 2px rgba(0,0,0,0.06)" : "none",
                 }}
               >
                 {tab}

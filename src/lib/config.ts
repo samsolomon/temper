@@ -89,10 +89,11 @@ export function readGlobalConfig(): GlobalConfig {
 
 export function writeGlobalConfig(config: GlobalConfig): void {
   const configDir = paths.config;
-  fs.mkdirSync(configDir, { recursive: true });
+  fs.mkdirSync(configDir, { recursive: true, mode: 0o700 });
   fs.writeFileSync(
     path.join(configDir, "config.json"),
     JSON.stringify(config, null, 2) + "\n",
+    { mode: 0o600 },
   );
 }
 

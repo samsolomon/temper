@@ -3,17 +3,30 @@ import path from "node:path";
 import { CSS_VARIABLE_NAMES, type ThemeTokens } from "../constants/shadcn.js";
 import { readConfig } from "./config.js";
 
-/**
- * Generate CSS content from theme tokens.
- * Produces :root {} and .dark {} blocks with all CSS custom properties.
- */
+/** Validate that a font import URL is a safe Google Fonts URL */
+function isSafeFontUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    return (
+      parsed.protocol === "https:" &&
+      parsed.hostname === "fonts.googleapis.com" &&
+      !url.includes('"') &&
+      !url.includes("'") &&
+      !url.includes(")")
+    );
+  } catch {
+    return false;
+  }
+}
+
 export function generateCSS(theme: ThemeTokens): string {
   const lines: string[] = [];
+  const safeImports = theme.fonts.imports.filter(isSafeFontUrl);
 
   // Font imports
-  if (theme.fonts.imports.length > 0) {
+  if (safeImports.length > 0) {
     lines.push('@import "tailwindcss";');
-    for (const url of theme.fonts.imports) {
+    for (const url of safeImports) {
       lines.push(`@import url("${url}");`);
     }
     lines.push("");
@@ -94,17 +107,18 @@ export function writeCSS(theme: ThemeTokens, cwd = process.cwd()): string {
  * Uses a brace-counting approach to handle blocks nested inside @layer base.
  */
 function replaceThemeBlocks(css: string, theme: ThemeTokens): string {
-  let result = replaceBlock(css, ":root", generateRootBlock(theme));
-  result = replaceBlock(result, ".dark", generateDarkBlock(theme));
+  let result = replaceBlock(css, ":root", (indent) => generateRootBlock(theme, indent));
+  result = replaceBlock(result, ".dark", (indent) => generateDarkBlock(theme, indent));
 
   // Update font imports: remove old Google Fonts imports and add new ones
   const fontImportRegex = /@import\s+url\(["'][^"']*fonts\.googleapis\.com[^"']*["']\);?\n?/g;
   result = result.replace(fontImportRegex, "");
 
-  if (theme.fonts.imports.length > 0) {
+  const safeImports = theme.fonts.imports.filter(isSafeFontUrl);
+  if (safeImports.length > 0) {
     // Insert font imports after @import "tailwindcss"
     const tailwindImport = '@import "tailwindcss";';
-    const fontImports = theme.fonts.imports
+    const fontImports = safeImports
       .map((url) => `@import url("${url}");`)
       .join("\n");
     result = result.replace(
@@ -118,18 +132,24 @@ function replaceThemeBlocks(css: string, theme: ThemeTokens): string {
 
 /**
  * Replace a CSS block by selector, counting braces to handle nesting.
+ * Preserves the leading whitespace (indentation) of the matched selector.
  */
-function replaceBlock(css: string, selector: string, replacement: string): string {
+function replaceBlock(css: string, selector: string, indentedReplacement: (indent: string) => string): string {
   const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const startRegex = new RegExp(`${escapedSelector}\\s*\\{`);
+  const startRegex = new RegExp(`(^|\\n)([ \\t]*)${escapedSelector}\\s*\\{`);
   const match = startRegex.exec(css);
   if (!match) return css;
 
-  const startIdx = match.index;
+  // match[2] is the leading whitespace before the selector
+  const indent = match[2] || "";
+  // Start of the selector (skip the captured newline/start-of-string)
+  const startIdx = match.index + match[1].length;
   let braceCount = 0;
   let endIdx = -1;
 
-  for (let i = match.index + match[0].length - 1; i < css.length; i++) {
+  // Start scanning from the opening brace
+  const braceSearchStart = match.index + match[0].length - 1;
+  for (let i = braceSearchStart; i < css.length; i++) {
     if (css[i] === "{") braceCount++;
     if (css[i] === "}") {
       braceCount--;
@@ -143,28 +163,30 @@ function replaceBlock(css: string, selector: string, replacement: string): strin
   // If no closing brace found, leave CSS unchanged
   if (endIdx === -1) return css;
 
-  return css.slice(0, startIdx) + replacement + css.slice(endIdx);
+  return css.slice(0, startIdx) + indentedReplacement(indent) + css.slice(endIdx);
 }
 
-function generateRootBlock(theme: ThemeTokens): string {
+function generateRootBlock(theme: ThemeTokens, indent = ""): string {
+  const inner = indent + "  ";
   const lines: string[] = [];
-  lines.push(":root {");
-  lines.push(`    --radius: ${theme.radius};`);
-  lines.push(`    --font-sans: ${theme.fonts.sans};`);
-  lines.push(`    --font-mono: ${theme.fonts.mono};`);
+  lines.push(`${indent}:root {`);
+  lines.push(`${inner}--radius: ${theme.radius};`);
+  lines.push(`${inner}--font-sans: ${theme.fonts.sans};`);
+  lines.push(`${inner}--font-mono: ${theme.fonts.mono};`);
   for (const name of CSS_VARIABLE_NAMES) {
-    lines.push(`    --${name}: ${theme.light[name]};`);
+    lines.push(`${inner}--${name}: ${theme.light[name]};`);
   }
-  lines.push("  }");
+  lines.push(`${indent}}`);
   return lines.join("\n");
 }
 
-function generateDarkBlock(theme: ThemeTokens): string {
+function generateDarkBlock(theme: ThemeTokens, indent = ""): string {
+  const inner = indent + "  ";
   const lines: string[] = [];
-  lines.push(".dark {");
+  lines.push(`${indent}.dark {`);
   for (const name of CSS_VARIABLE_NAMES) {
-    lines.push(`    --${name}: ${theme.dark[name]};`);
+    lines.push(`${inner}--${name}: ${theme.dark[name]};`);
   }
-  lines.push("  }");
+  lines.push(`${indent}}`);
   return lines.join("\n");
 }

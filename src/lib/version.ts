@@ -42,11 +42,14 @@ export function saveSnapshot(
   );
 }
 
+const SEMVER_RE = /^\d+\.\d+\.\d+$/;
+
 /** Read a specific version snapshot */
 export function readSnapshot(
   version: string,
   cwd = process.cwd(),
 ): VersionSnapshot | null {
+  if (!SEMVER_RE.test(version)) return null;
   const filePath = path.join(getVersionsDir(cwd), `${version}.json`);
   if (!fs.existsSync(filePath)) return null;
   try {

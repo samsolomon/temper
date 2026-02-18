@@ -180,42 +180,79 @@ export async function generateTheme(
     }
   }
 
-  if (!toolInput.light || !toolInput.dark) {
+  if (
+    !toolInput.light ||
+    typeof toolInput.light !== "object" ||
+    !toolInput.dark ||
+    typeof toolInput.dark !== "object"
+  ) {
     throw new Error("Claude did not return a valid theme. Please try again.");
   }
 
-  const light = toolInput.light as Record<string, string>;
-  const dark = toolInput.dark as Record<string, string>;
-  const fonts = toolInput.fonts as {
-    sans: string;
-    mono: string;
-    imports: string[];
-  };
+  const rawLight = toolInput.light as Record<string, unknown>;
+  const rawDark = toolInput.dark as Record<string, unknown>;
 
-  // Validate all variables are present
+  // Validate all variables are present and are strings
+  const light: Record<string, string> = {};
+  const dark: Record<string, string> = {};
+
   for (const name of CSS_VARIABLE_NAMES) {
-    if (!light[name]) {
-      throw new Error(`Missing light mode value for --${name}`);
+    const lv = rawLight[name];
+    if (typeof lv !== "string" || lv === "") {
+      throw new Error(`Missing or invalid light mode value for --${name}`);
     }
-    if (!dark[name]) {
-      throw new Error(`Missing dark mode value for --${name}`);
+    light[name] = lv;
+
+    const dv = rawDark[name];
+    if (typeof dv !== "string" || dv === "") {
+      throw new Error(`Missing or invalid dark mode value for --${name}`);
     }
+    dark[name] = dv;
   }
+
+  // Validate fonts
+  const rawFonts = toolInput.fonts as Record<string, unknown> | undefined;
+  const fontSans =
+    typeof rawFonts?.sans === "string"
+      ? rawFonts.sans
+      : "ui-sans-serif, system-ui, sans-serif";
+  const fontMono =
+    typeof rawFonts?.mono === "string"
+      ? rawFonts.mono
+      : "ui-monospace, monospace";
+  const fontImports =
+    Array.isArray(rawFonts?.imports) &&
+    rawFonts.imports.every((v: unknown) => typeof v === "string")
+      ? (rawFonts.imports as string[])
+      : [];
 
   return {
     theme: {
       version: "", // Will be set by the caller
-      radius: (toolInput.radius as string) || "0.625rem",
+      radius:
+        typeof toolInput.radius === "string"
+          ? toolInput.radius
+          : "0.625rem",
       fonts: {
-        sans: fonts?.sans || "ui-sans-serif, system-ui, sans-serif",
-        mono: fonts?.mono || "ui-monospace, monospace",
-        imports: fonts?.imports || [],
+        sans: fontSans,
+        mono: fontMono,
+        imports: fontImports,
       },
       light: light as Record<CSSVariableName, string>,
       dark: dark as Record<CSSVariableName, string>,
     },
-    versionBump: (toolInput.versionBump as VersionBump) || "minor",
-    changelog: (toolInput.changelog as string) || "Theme updated",
-    brief: (toolInput.brief as string) || "Theme changes applied",
+    versionBump:
+      typeof toolInput.versionBump === "string" &&
+      ["major", "minor", "patch"].includes(toolInput.versionBump)
+        ? (toolInput.versionBump as VersionBump)
+        : "minor",
+    changelog:
+      typeof toolInput.changelog === "string"
+        ? toolInput.changelog
+        : "Theme updated",
+    brief:
+      typeof toolInput.brief === "string"
+        ? toolInput.brief
+        : "Theme changes applied",
   };
 }

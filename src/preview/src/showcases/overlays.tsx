@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const btnPrimary: React.CSSProperties = {
   display: "inline-flex",
@@ -26,7 +26,6 @@ const btnOutline: React.CSSProperties = {
 export function OverlaysShowcase() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [alertDialogOpen, setAlertDialogOpen] = useState(false);
-  const [popoverOpen, setPopoverOpen] = useState(false);
 
   return (
     <>
@@ -199,7 +198,30 @@ export function OverlaysShowcase() {
       <div className="example-section">
         <div className="example-label">Popover</div>
         <div className="example-box">
-          <div style={{ position: "relative", display: "inline-block" }}>
+          <PopoverDemo />
+        </div>
+      </div>
+    </>
+  );
+}
+
+function PopoverDemo() {
+  const [popoverOpen, setPopoverOpen] = useState(false);
+  const popoverRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!popoverOpen) return;
+    function handleClick(e: MouseEvent) {
+      if (popoverRef.current && !popoverRef.current.contains(e.target as Node)) {
+        setPopoverOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [popoverOpen]);
+
+  return (
+          <div ref={popoverRef} style={{ position: "relative", display: "inline-block" }}>
             <button style={btnOutline} onClick={() => setPopoverOpen(!popoverOpen)}>
               Open Popover
             </button>
@@ -252,8 +274,5 @@ export function OverlaysShowcase() {
               </div>
             )}
           </div>
-        </div>
-      </div>
-    </>
   );
 }

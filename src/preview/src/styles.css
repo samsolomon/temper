@@ -261,6 +261,12 @@ body {
   align-items: center;
 }
 
+/* ─── Animations ─── */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
 @media (max-width: 768px) {
   .shell {
     grid-template-columns: 1fr;

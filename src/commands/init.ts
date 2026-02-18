@@ -105,17 +105,18 @@ export async function init() {
   writeConfig(config, cwd);
 
   // Write default theme
-  writeTheme(DEFAULT_THEME, cwd);
+  const defaultTheme = structuredClone(DEFAULT_THEME);
+  writeTheme(defaultTheme, cwd);
 
   // Save initial version snapshot
   saveSnapshot(
     {
-      version: DEFAULT_THEME.version,
+      version: defaultTheme.version,
       timestamp: new Date().toISOString(),
       prompt: "Initial default theme",
       brief: "Default shadcn/ui neutral theme with OKLCH colors",
       changelog: "Initialized with default shadcn/ui theme",
-      theme: DEFAULT_THEME,
+      theme: structuredClone(defaultTheme),
     },
     cwd,
   );
