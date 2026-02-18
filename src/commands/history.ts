@@ -24,7 +24,7 @@ export async function history() {
 
   // Print header
   const versionWidth = 10;
-  const dateWidth = 20;
+  const dateWidth = 24;
   const promptWidth = 35;
 
   console.log(

@@ -23,7 +23,7 @@ export async function preview() {
   const theme = readTheme(cwd);
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
-  const previewDir = path.join(__dirname, "../preview");
+  const previewDir = path.join(__dirname, "preview");
 
   // Check if preview app exists
   if (!fs.existsSync(previewDir)) {
