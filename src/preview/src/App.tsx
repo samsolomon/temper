@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Icon } from "@iconify/react";
 import { useTheme } from "./theme-provider.tsx";
 
 // Single-component showcases
@@ -416,6 +417,7 @@ export function App() {
           {theme && <span className="version-badge">v{theme.version}</span>}
         </div>
         <button className="dark-toggle" onClick={toggleDark}>
+          <Icon icon={isDark ? "lucide:sun" : "lucide:moon"} width="16" height="16" />
           {isDark ? "Light" : "Dark"}
         </button>
       </div>

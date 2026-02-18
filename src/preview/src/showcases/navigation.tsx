@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Icon } from "@iconify/react";
 
 const tabStyle: React.CSSProperties = {
   padding: "0.5rem 0.75rem",
@@ -113,7 +114,7 @@ export function BreadcrumbShowcase() {
           >
             Home
           </a>
-          <span style={{ color: "var(--muted-foreground)" }}>/</span>
+          <Icon icon="lucide:chevron-right" width="14" height="14" style={{ color: "var(--muted-foreground)" }} />
           <a
             href="#"
             style={{ color: "var(--muted-foreground)", textDecoration: "none" }}
@@ -121,7 +122,7 @@ export function BreadcrumbShowcase() {
           >
             Settings
           </a>
-          <span style={{ color: "var(--muted-foreground)" }}>/</span>
+          <Icon icon="lucide:chevron-right" width="14" height="14" style={{ color: "var(--muted-foreground)" }} />
           <span style={{ color: "var(--foreground)", fontWeight: 500 }}>
             Profile
           </span>

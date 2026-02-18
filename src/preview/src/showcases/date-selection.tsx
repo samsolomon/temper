@@ -1,4 +1,5 @@
 import React from "react";
+import { Icon } from "@iconify/react";
 
 const navBtn: React.CSSProperties = {
   display: "inline-flex",
@@ -30,9 +31,9 @@ function CalendarGrid() {
   return (
     <div style={{ width: "280px" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.75rem" }}>
-        <button style={navBtn} aria-label="Previous month">&lsaquo;</button>
+        <button style={navBtn} aria-label="Previous month"><Icon icon="lucide:chevron-left" width="16" height="16" /></button>
         <span style={{ fontSize: "0.875rem", fontWeight: 600 }}>February 2026</span>
-        <button style={navBtn} aria-label="Next month">&rsaquo;</button>
+        <button style={navBtn} aria-label="Next month"><Icon icon="lucide:chevron-right" width="16" height="16" /></button>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", textAlign: "center", marginBottom: "0.25rem" }}>
         {dayNames.map((d) => (
@@ -102,7 +103,7 @@ export function DatePickerShowcase() {
             }}
           >
             <span style={{ fontSize: "0.875rem", color: "var(--muted-foreground)", flex: 1 }}>Pick a date</span>
-            <span style={{ fontSize: "1rem" }}>&#128197;</span>
+            <Icon icon="lucide:calendar" width="16" height="16" style={{ color: "var(--muted-foreground)" }} />
           </div>
           <div
             style={{
@@ -153,7 +154,7 @@ export function ComboboxShowcase() {
             }}
           >
             <span>Next.js</span>
-            <span style={{ fontSize: "0.625rem", color: "var(--muted-foreground)" }}>&#9660;</span>
+            <Icon icon="lucide:chevrons-up-down" width="14" height="14" style={{ color: "var(--muted-foreground)" }} />
           </div>
           <div
             style={{
@@ -198,8 +199,8 @@ export function ComboboxShowcase() {
                     cursor: "default",
                   }}
                 >
-                  <span style={{ width: "1rem", textAlign: "center", fontSize: "0.75rem" }}>
-                    {fw.value === selected ? "\u2713" : ""}
+                  <span style={{ width: "1rem", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
+                    {fw.value === selected ? <Icon icon="lucide:check" width="14" height="14" /> : ""}
                   </span>
                   {fw.label}
                 </div>
@@ -241,7 +242,7 @@ export function PaginationShowcase() {
       <div className="example-box">
         <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
-            <button style={pageBtn(false, current === 1)} aria-label="Previous page">&#8249;</button>
+            <button style={pageBtn(false, current === 1)} aria-label="Previous page"><Icon icon="lucide:chevron-left" width="16" height="16" /></button>
             {pages.map((p) => (
               <button key={p} style={pageBtn(p === current)}>
                 {p}
@@ -249,7 +250,7 @@ export function PaginationShowcase() {
             ))}
             <span style={{ padding: "0 0.25rem", fontSize: "0.8125rem", color: "var(--muted-foreground)" }}>...</span>
             <button style={pageBtn()}>{total}</button>
-            <button style={pageBtn()} aria-label="Next page">&rsaquo;</button>
+            <button style={pageBtn()} aria-label="Next page"><Icon icon="lucide:chevron-right" width="16" height="16" /></button>
           </div>
           <p style={{ fontSize: "0.75rem", color: "var(--muted-foreground)" }}>
             Showing 21–30 of 100 results
@@ -320,7 +321,7 @@ export function CarouselShowcase() {
                 flexShrink: 0,
               }}
             >
-              &#8249;
+              <Icon icon="lucide:chevron-left" width="16" height="16" />
             </button>
             <div style={{ display: "flex", gap: "0.75rem", flex: 1, overflow: "hidden" }}>
               {cards.map((n) => (
@@ -353,7 +354,7 @@ export function CarouselShowcase() {
                 flexShrink: 0,
               }}
             >
-              &#8250;
+              <Icon icon="lucide:chevron-right" width="16" height="16" />
             </button>
           </div>
           <div style={{ display: "flex", justifyContent: "center", gap: "0.375rem", marginTop: "0.75rem" }}>

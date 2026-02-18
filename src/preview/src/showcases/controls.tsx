@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Icon } from "@iconify/react";
 
 /* ── Switch ── */
 function Switch({ defaultOn = false, disabled = false, label }: { defaultOn?: boolean; disabled?: boolean; label: string }) {
@@ -122,7 +123,7 @@ export function SliderShowcase() {
 }
 
 /* ── Toggle ── */
-function Toggle({ label, pressed = false, variant = "default" }: { label: string; pressed?: boolean; variant?: "default" | "outline" }) {
+function Toggle({ label, pressed = false, variant = "default" }: { label: React.ReactNode; pressed?: boolean; variant?: "default" | "outline" }) {
   const [isPressed, setIsPressed] = useState(pressed);
   const base: React.CSSProperties = {
     display: "inline-flex",
@@ -153,9 +154,9 @@ export function ToggleShowcase() {
       <div className="example-label">Toggle</div>
       <div className="example-box">
         <div className="example-row">
-          <Toggle label="B" pressed />
-          <Toggle label="I" />
-          <Toggle label="U" />
+          <Toggle label={<Icon icon="lucide:bold" width="16" height="16" />} pressed />
+          <Toggle label={<Icon icon="lucide:italic" width="16" height="16" />} />
+          <Toggle label={<Icon icon="lucide:underline" width="16" height="16" />} />
           <Toggle label="Outline" variant="outline" />
         </div>
       </div>

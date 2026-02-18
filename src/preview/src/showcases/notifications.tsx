@@ -1,4 +1,5 @@
 import React from "react";
+import { Icon } from "@iconify/react";
 
 /* ── Toast ── */
 function Toast({
@@ -140,10 +141,10 @@ export function TooltipShowcase() {
 /* ── Sidebar Component ── */
 export function SidebarShowcase() {
   const items = [
-    { label: "Dashboard", active: true, focused: false },
-    { label: "Projects", active: false, focused: true },
-    { label: "Team", active: false, focused: false },
-    { label: "Settings", active: false, focused: false },
+    { label: "Dashboard", icon: "lucide:layout-dashboard", active: true, focused: false },
+    { label: "Projects", icon: "lucide:folder", active: false, focused: true },
+    { label: "Team", icon: "lucide:users", active: false, focused: false },
+    { label: "Settings", icon: "lucide:settings", active: false, focused: false },
   ];
 
   return (
@@ -196,6 +197,9 @@ export function SidebarShowcase() {
               <div
                 key={item.label}
                 style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
                   padding: "0.375rem 0.625rem",
                   fontSize: "0.8125rem",
                   borderRadius: "calc(var(--radius) - 2px)",
@@ -206,6 +210,7 @@ export function SidebarShowcase() {
                   boxShadow: item.focused ? "0 0 0 2px var(--sidebar-ring)" : "none",
                 }}
               >
+                <Icon icon={item.icon} width="16" height="16" />
                 {item.label}
               </div>
             ))}

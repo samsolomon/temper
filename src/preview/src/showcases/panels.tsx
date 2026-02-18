@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Icon } from "@iconify/react";
 
 export function AccordionShowcase() {
   const [open, setOpen] = useState(0);
@@ -36,15 +37,15 @@ export function AccordionShowcase() {
                 }}
               >
                 {item.title}
-                <span
+                <Icon
+                  icon="lucide:chevron-down"
+                  width="16"
+                  height="16"
                   style={{
                     transition: "transform 0.2s",
                     transform: open === i ? "rotate(180deg)" : "rotate(0deg)",
-                    fontSize: "0.75rem",
                   }}
-                >
-                  &#9660;
-                </span>
+                />
               </button>
               {open === i && (
                 <div id={`accordion-panel-${i}`} role="region" aria-labelledby={`accordion-trigger-${i}`} style={{ paddingBottom: "1rem", fontSize: "0.875rem", color: "var(--muted-foreground)", lineHeight: 1.6 }}>

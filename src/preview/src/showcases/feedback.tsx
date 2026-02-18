@@ -1,4 +1,5 @@
 import React from "react";
+import { Icon } from "@iconify/react";
 
 const badgeBase: React.CSSProperties = {
   display: "inline-flex",
@@ -42,18 +43,23 @@ export function AlertShowcase() {
         <div className="example-box">
           <div
             style={{
+              display: "flex",
+              gap: "0.75rem",
               border: "1px solid var(--border)",
               borderRadius: "var(--radius)",
               padding: "1rem",
               maxWidth: "520px",
             }}
           >
-            <p style={{ fontWeight: 600, fontSize: "0.875rem", marginBottom: "0.25rem" }}>
-              Heads up!
-            </p>
-            <p style={{ fontSize: "0.875rem", color: "var(--muted-foreground)" }}>
-              You can add components to your app using the CLI.
-            </p>
+            <Icon icon="lucide:terminal" width="16" height="16" style={{ flexShrink: 0, marginTop: "0.125rem" }} />
+            <div>
+              <p style={{ fontWeight: 600, fontSize: "0.875rem", marginBottom: "0.25rem" }}>
+                Heads up!
+              </p>
+              <p style={{ fontSize: "0.875rem", color: "var(--muted-foreground)" }}>
+                You can add components to your app using the CLI.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -63,6 +69,8 @@ export function AlertShowcase() {
         <div className="example-box">
           <div
             style={{
+              display: "flex",
+              gap: "0.75rem",
               border: "1px solid var(--destructive)",
               borderRadius: "var(--radius)",
               padding: "1rem",
@@ -70,12 +78,15 @@ export function AlertShowcase() {
               maxWidth: "520px",
             }}
           >
-            <p style={{ fontWeight: 600, fontSize: "0.875rem", marginBottom: "0.25rem" }}>
-              Error
-            </p>
-            <p style={{ fontSize: "0.875rem", opacity: 0.9 }}>
-              Your session has expired. Please log in again.
-            </p>
+            <Icon icon="lucide:circle-alert" width="16" height="16" style={{ flexShrink: 0, marginTop: "0.125rem" }} />
+            <div>
+              <p style={{ fontWeight: 600, fontSize: "0.875rem", marginBottom: "0.25rem" }}>
+                Error
+              </p>
+              <p style={{ fontSize: "0.875rem", opacity: 0.9 }}>
+                Your session has expired. Please log in again.
+              </p>
+            </div>
           </div>
         </div>
       </div>

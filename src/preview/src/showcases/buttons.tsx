@@ -1,4 +1,5 @@
 import React from "react";
+import { Icon } from "@iconify/react";
 
 const base: React.CSSProperties = {
   display: "inline-flex",
@@ -22,7 +23,7 @@ function Btn({
   style,
   disabled,
 }: {
-  label: string;
+  label: React.ReactNode;
   style: React.CSSProperties;
   disabled?: boolean;
 }) {
@@ -132,7 +133,7 @@ export function ButtonsShowcase() {
               }}
             />
             <Btn
-              label="Icon"
+              label={<Icon icon="lucide:settings" width="16" height="16" />}
               style={{
                 ...base,
                 background: "var(--primary)",

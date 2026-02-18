@@ -1,4 +1,5 @@
 import React from "react";
+import { Icon } from "@iconify/react";
 
 const menuCard: React.CSSProperties = {
   background: "var(--popover)",
@@ -75,7 +76,7 @@ export function DropdownMenuShowcase() {
             <div style={menuSep} />
             <div style={menuItem}>
               <span style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <span style={{ width: "1rem", textAlign: "center" }}>&#10003;</span>
+                <span style={{ width: "1rem", display: "inline-flex", alignItems: "center", justifyContent: "center" }}><Icon icon="lucide:check" width="14" height="14" /></span>
                 Show Bookmarks
               </span>
             </div>
@@ -229,6 +230,9 @@ export function NavigationMenuShowcase() {
               <button
                 key={label}
                 style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.25rem",
                   padding: "0.5rem 0.75rem",
                   fontSize: "0.8125rem",
                   fontWeight: 500,
@@ -240,7 +244,7 @@ export function NavigationMenuShowcase() {
                   color: i === 0 ? "var(--accent-foreground)" : "var(--foreground)",
                 }}
               >
-                {label} &#9662;
+                {label} <Icon icon="lucide:chevron-down" width="14" height="14" />
               </button>
             ))}
           </div>

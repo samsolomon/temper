@@ -47,7 +47,7 @@ export async function preview() {
         __INITIAL_THEME__: JSON.stringify(theme),
       },
       optimizeDeps: {
-        include: ["react", "react-dom"],
+        include: ["react", "react-dom", "@iconify/react"],
       },
     });
 
