@@ -10,31 +10,33 @@ const badgeBase: React.CSSProperties = {
   lineHeight: 1.5,
 };
 
-export function FeedbackShowcase() {
+export function BadgeShowcase() {
   return (
-    <>
-      {/* Badge variants */}
-      <div className="example-section">
-        <div className="example-label">Badge</div>
-        <div className="example-box">
-          <div className="example-row">
-            <span style={{ ...badgeBase, background: "var(--primary)", color: "var(--primary-foreground)" }}>
-              Default
-            </span>
-            <span style={{ ...badgeBase, background: "var(--secondary)", color: "var(--secondary-foreground)", border: "1px solid var(--border)" }}>
-              Secondary
-            </span>
-            <span style={{ ...badgeBase, background: "var(--destructive)", color: "var(--destructive-foreground)" }}>
-              Destructive
-            </span>
-            <span style={{ ...badgeBase, background: "transparent", color: "var(--foreground)", border: "1px solid var(--border)" }}>
-              Outline
-            </span>
-          </div>
+    <div className="example-section">
+      <div className="example-label">Badge</div>
+      <div className="example-box">
+        <div className="example-row">
+          <span style={{ ...badgeBase, background: "var(--primary)", color: "var(--primary-foreground)" }}>
+            Default
+          </span>
+          <span style={{ ...badgeBase, background: "var(--secondary)", color: "var(--secondary-foreground)", border: "1px solid var(--border)" }}>
+            Secondary
+          </span>
+          <span style={{ ...badgeBase, background: "var(--destructive)", color: "var(--destructive-foreground)" }}>
+            Destructive
+          </span>
+          <span style={{ ...badgeBase, background: "transparent", color: "var(--foreground)", border: "1px solid var(--border)" }}>
+            Outline
+          </span>
         </div>
       </div>
+    </div>
+  );
+}
 
-      {/* Alert — default */}
+export function AlertShowcase() {
+  return (
+    <>
       <div className="example-section">
         <div className="example-label">Alert — Default</div>
         <div className="example-box">
@@ -56,7 +58,6 @@ export function FeedbackShowcase() {
         </div>
       </div>
 
-      {/* Alert — destructive */}
       <div className="example-section">
         <div className="example-label">Alert — Destructive</div>
         <div className="example-box">
@@ -78,29 +79,30 @@ export function FeedbackShowcase() {
           </div>
         </div>
       </div>
+    </>
+  );
+}
 
-      {/* Skeleton */}
-      <div className="example-section">
-        <div className="example-label">Skeleton</div>
-        <div className="example-box">
-          <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", maxWidth: "400px" }}>
-            {/* Card skeleton */}
-            <div style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
-              <div style={{ width: "2.5rem", height: "2.5rem", borderRadius: "9999px", background: "var(--muted)", animation: "pulse 2s ease-in-out infinite", flexShrink: 0 }} />
-              <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-                <div style={{ height: "0.875rem", width: "55%", borderRadius: "var(--radius)", background: "var(--muted)", animation: "pulse 2s ease-in-out infinite" }} />
-                <div style={{ height: "0.875rem", width: "80%", borderRadius: "var(--radius)", background: "var(--muted)", animation: "pulse 2s ease-in-out infinite" }} />
-              </div>
+export function SkeletonShowcase() {
+  return (
+    <div className="example-section">
+      <div className="example-label">Skeleton</div>
+      <div className="example-box">
+        <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", maxWidth: "400px" }}>
+          <div style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
+            <div style={{ width: "2.5rem", height: "2.5rem", borderRadius: "9999px", background: "var(--muted)", animation: "pulse 2s ease-in-out infinite", flexShrink: 0 }} />
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+              <div style={{ height: "0.875rem", width: "55%", borderRadius: "var(--radius)", background: "var(--muted)", animation: "pulse 2s ease-in-out infinite" }} />
+              <div style={{ height: "0.875rem", width: "80%", borderRadius: "var(--radius)", background: "var(--muted)", animation: "pulse 2s ease-in-out infinite" }} />
             </div>
-            {/* Content skeleton */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-              <div style={{ height: "0.75rem", width: "100%", borderRadius: "var(--radius)", background: "var(--muted)", animation: "pulse 2s ease-in-out infinite" }} />
-              <div style={{ height: "0.75rem", width: "90%", borderRadius: "var(--radius)", background: "var(--muted)", animation: "pulse 2s ease-in-out infinite" }} />
-              <div style={{ height: "0.75rem", width: "70%", borderRadius: "var(--radius)", background: "var(--muted)", animation: "pulse 2s ease-in-out infinite" }} />
-            </div>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+            <div style={{ height: "0.75rem", width: "100%", borderRadius: "var(--radius)", background: "var(--muted)", animation: "pulse 2s ease-in-out infinite" }} />
+            <div style={{ height: "0.75rem", width: "90%", borderRadius: "var(--radius)", background: "var(--muted)", animation: "pulse 2s ease-in-out infinite" }} />
+            <div style={{ height: "0.75rem", width: "70%", borderRadius: "var(--radius)", background: "var(--muted)", animation: "pulse 2s ease-in-out infinite" }} />
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

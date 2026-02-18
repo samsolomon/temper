@@ -26,10 +26,9 @@ const descStyle: React.CSSProperties = {
   marginTop: "0.25rem",
 };
 
-export function FormsShowcase() {
+export function InputShowcase() {
   return (
     <>
-      {/* Input */}
       <div className="example-section">
         <div className="example-label">Input</div>
         <div className="example-box">
@@ -68,95 +67,7 @@ export function FormsShowcase() {
         </div>
       </div>
 
-      {/* Textarea */}
-      <div className="example-section">
-        <div className="example-label">Textarea</div>
-        <div className="example-box">
-          <div style={{ maxWidth: "380px" }}>
-            <label style={labelStyle}>Bio</label>
-            <textarea
-              placeholder="Tell us about yourself..."
-              rows={3}
-              style={{ ...inputStyle, height: "auto", resize: "vertical", lineHeight: 1.5 }}
-            />
-            <p style={descStyle}>Max 160 characters.</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Select */}
-      <div className="example-section">
-        <div className="example-label">Select</div>
-        <div className="example-box">
-          <div style={{ maxWidth: "380px" }}>
-            <label style={labelStyle}>Country</label>
-            <select style={{ ...inputStyle, appearance: "auto", cursor: "pointer" }}>
-              <option>Select a country</option>
-              <option>United States</option>
-              <option>United Kingdom</option>
-              <option>Canada</option>
-              <option>Australia</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      {/* Checkbox */}
-      <div className="example-section">
-        <div className="example-label">Checkbox</div>
-        <div className="example-box">
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.625rem" }}>
-            <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.875rem" }}>
-              <input
-                type="checkbox"
-                style={{ width: "1rem", height: "1rem", accentColor: "var(--primary)" }}
-              />
-              Accept terms and conditions
-            </label>
-            <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.875rem" }}>
-              <input
-                type="checkbox"
-                defaultChecked
-                style={{ width: "1rem", height: "1rem", accentColor: "var(--primary)" }}
-              />
-              Subscribe to newsletter
-            </label>
-            <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.875rem", opacity: 0.5 }}>
-              <input
-                type="checkbox"
-                disabled
-                style={{ width: "1rem", height: "1rem" }}
-              />
-              Disabled option
-            </label>
-          </div>
-        </div>
-      </div>
-
-      {/* Radio Group */}
-      <div className="example-section">
-        <div className="example-label">Radio Group</div>
-        <div className="example-box">
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.625rem" }}>
-            {["Comfortable", "Compact", "Spacious"].map((option, i) => (
-              <label
-                key={option}
-                style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.875rem" }}
-              >
-                <input
-                  type="radio"
-                  name="density"
-                  defaultChecked={i === 0}
-                  style={{ accentColor: "var(--primary)" }}
-                />
-                {option}
-              </label>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Full form example */}
+      {/* Composed form */}
       <div className="example-section">
         <div className="example-label">Composed form</div>
         <div className="example-box">
@@ -216,5 +127,105 @@ export function FormsShowcase() {
         </div>
       </div>
     </>
+  );
+}
+
+export function TextareaShowcase() {
+  return (
+    <div className="example-section">
+      <div className="example-label">Textarea</div>
+      <div className="example-box">
+        <div style={{ maxWidth: "380px" }}>
+          <label style={labelStyle}>Bio</label>
+          <textarea
+            placeholder="Tell us about yourself..."
+            rows={3}
+            style={{ ...inputStyle, height: "auto", resize: "vertical", lineHeight: 1.5 }}
+          />
+          <p style={descStyle}>Max 160 characters.</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function SelectShowcase() {
+  return (
+    <div className="example-section">
+      <div className="example-label">Select</div>
+      <div className="example-box">
+        <div style={{ maxWidth: "380px" }}>
+          <label style={labelStyle}>Country</label>
+          <select style={{ ...inputStyle, appearance: "auto", cursor: "pointer" }}>
+            <option>Select a country</option>
+            <option>United States</option>
+            <option>United Kingdom</option>
+            <option>Canada</option>
+            <option>Australia</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function CheckboxShowcase() {
+  return (
+    <div className="example-section">
+      <div className="example-label">Checkbox</div>
+      <div className="example-box">
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.625rem" }}>
+          <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.875rem" }}>
+            <input
+              type="checkbox"
+              style={{ width: "1rem", height: "1rem", accentColor: "var(--primary)" }}
+            />
+            Accept terms and conditions
+          </label>
+          <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.875rem" }}>
+            <input
+              type="checkbox"
+              defaultChecked
+              style={{ width: "1rem", height: "1rem", accentColor: "var(--primary)" }}
+            />
+            Subscribe to newsletter
+          </label>
+          <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.875rem", opacity: 0.5 }}>
+            <input
+              type="checkbox"
+              disabled
+              style={{ width: "1rem", height: "1rem" }}
+            />
+            Disabled option
+          </label>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function RadioGroupShowcase() {
+  return (
+    <div className="example-section">
+      <div className="example-label">Radio Group</div>
+      <div className="example-box">
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.625rem" }}>
+          {["Comfortable", "Compact", "Spacious"].map((option, i) => (
+            <label
+              key={option}
+              style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.875rem" }}
+            >
+              <input
+                type="radio"
+                name="density"
+                defaultChecked={i === 0}
+                style={{ accentColor: "var(--primary)" }}
+              />
+              {option}
+            </label>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }

@@ -19,14 +19,13 @@ const activeTabStyle: React.CSSProperties = {
   borderBottomColor: "var(--primary)",
 };
 
-export function NavigationShowcase() {
+export function TabsShowcase() {
   const [activeTab, setActiveTab] = useState(0);
   const [activePill, setActivePill] = useState(0);
   const tabs = ["Account", "Security", "Notifications", "Billing"];
 
   return (
     <>
-      {/* Tabs */}
       <div className="example-section">
         <div className="example-label">Tabs</div>
         <div className="example-box">
@@ -62,7 +61,6 @@ export function NavigationShowcase() {
         </div>
       </div>
 
-      {/* Pill tabs */}
       <div className="example-section">
         <div className="example-label">Pill tabs</div>
         <div className="example-box">
@@ -98,34 +96,37 @@ export function NavigationShowcase() {
           </div>
         </div>
       </div>
-
-      {/* Breadcrumb */}
-      <div className="example-section">
-        <div className="example-label">Breadcrumb</div>
-        <div className="example-box">
-          <nav style={{ display: "flex", alignItems: "center", gap: "0.375rem", fontSize: "0.875rem" }}>
-            <a
-              href="#"
-              style={{ color: "var(--muted-foreground)", textDecoration: "none" }}
-              onClick={(e) => e.preventDefault()}
-            >
-              Home
-            </a>
-            <span style={{ color: "var(--muted-foreground)" }}>/</span>
-            <a
-              href="#"
-              style={{ color: "var(--muted-foreground)", textDecoration: "none" }}
-              onClick={(e) => e.preventDefault()}
-            >
-              Settings
-            </a>
-            <span style={{ color: "var(--muted-foreground)" }}>/</span>
-            <span style={{ color: "var(--foreground)", fontWeight: 500 }}>
-              Profile
-            </span>
-          </nav>
-        </div>
-      </div>
     </>
+  );
+}
+
+export function BreadcrumbShowcase() {
+  return (
+    <div className="example-section">
+      <div className="example-label">Breadcrumb</div>
+      <div className="example-box">
+        <nav style={{ display: "flex", alignItems: "center", gap: "0.375rem", fontSize: "0.875rem" }}>
+          <a
+            href="#"
+            style={{ color: "var(--muted-foreground)", textDecoration: "none" }}
+            onClick={(e) => e.preventDefault()}
+          >
+            Home
+          </a>
+          <span style={{ color: "var(--muted-foreground)" }}>/</span>
+          <a
+            href="#"
+            style={{ color: "var(--muted-foreground)", textDecoration: "none" }}
+            onClick={(e) => e.preventDefault()}
+          >
+            Settings
+          </a>
+          <span style={{ color: "var(--muted-foreground)" }}>/</span>
+          <span style={{ color: "var(--foreground)", fontWeight: 500 }}>
+            Profile
+          </span>
+        </nav>
+      </div>
+    </div>
   );
 }
