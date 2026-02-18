@@ -15,6 +15,9 @@ export function AccordionShowcase() {
           {items.map((item, i) => (
             <div key={i} style={{ borderBottom: "1px solid var(--border)" }}>
               <button
+                id={`accordion-trigger-${i}`}
+                aria-expanded={open === i}
+                aria-controls={`accordion-panel-${i}`}
                 onClick={() => setOpen(open === i ? -1 : i)}
                 style={{
                   width: "100%",
@@ -44,7 +47,7 @@ export function AccordionShowcase() {
                 </span>
               </button>
               {open === i && (
-                <div style={{ paddingBottom: "1rem", fontSize: "0.875rem", color: "var(--muted-foreground)", lineHeight: 1.6 }}>
+                <div id={`accordion-panel-${i}`} role="region" aria-labelledby={`accordion-trigger-${i}`} style={{ paddingBottom: "1rem", fontSize: "0.875rem", color: "var(--muted-foreground)", lineHeight: 1.6 }}>
                   {item.content}
                 </div>
               )}

@@ -30,9 +30,9 @@ function CalendarGrid() {
   return (
     <div style={{ width: "280px" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.75rem" }}>
-        <button style={navBtn}>&lsaquo;</button>
+        <button style={navBtn} aria-label="Previous month">&lsaquo;</button>
         <span style={{ fontSize: "0.875rem", fontWeight: 600 }}>February 2026</span>
-        <button style={navBtn}>&rsaquo;</button>
+        <button style={navBtn} aria-label="Next month">&rsaquo;</button>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", textAlign: "center", marginBottom: "0.25rem" }}>
         {dayNames.map((d) => (
@@ -241,7 +241,7 @@ export function PaginationShowcase() {
       <div className="example-box">
         <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
-            <button style={pageBtn(false, current === 1)}>&#8249;</button>
+            <button style={pageBtn(false, current === 1)} aria-label="Previous page">&#8249;</button>
             {pages.map((p) => (
               <button key={p} style={pageBtn(p === current)}>
                 {p}
@@ -249,7 +249,7 @@ export function PaginationShowcase() {
             ))}
             <span style={{ padding: "0 0.25rem", fontSize: "0.8125rem", color: "var(--muted-foreground)" }}>...</span>
             <button style={pageBtn()}>{total}</button>
-            <button style={pageBtn()}>&rsaquo;</button>
+            <button style={pageBtn()} aria-label="Next page">&rsaquo;</button>
           </div>
           <p style={{ fontSize: "0.75rem", color: "var(--muted-foreground)" }}>
             Showing 21–30 of 100 results
@@ -311,6 +311,7 @@ export function CarouselShowcase() {
         <div style={{ maxWidth: "480px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
             <button
+              aria-label="Previous slide"
               style={{
                 ...navBtn,
                 width: "2rem",
@@ -343,6 +344,7 @@ export function CarouselShowcase() {
               ))}
             </div>
             <button
+              aria-label="Next slide"
               style={{
                 ...navBtn,
                 width: "2rem",

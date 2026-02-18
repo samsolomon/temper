@@ -140,10 +140,10 @@ export function TooltipShowcase() {
 /* ── Sidebar Component ── */
 export function SidebarShowcase() {
   const items = [
-    { label: "Dashboard", active: true },
-    { label: "Projects", active: false },
-    { label: "Team", active: false },
-    { label: "Settings", active: false },
+    { label: "Dashboard", active: true, focused: false },
+    { label: "Projects", active: false, focused: true },
+    { label: "Team", active: false, focused: false },
+    { label: "Settings", active: false, focused: false },
   ];
 
   return (
@@ -203,6 +203,7 @@ export function SidebarShowcase() {
                   background: item.active ? "var(--sidebar-primary)" : "transparent",
                   color: item.active ? "var(--sidebar-primary-foreground)" : "var(--sidebar-foreground)",
                   fontWeight: item.active ? 500 : 400,
+                  boxShadow: item.focused ? "0 0 0 2px var(--sidebar-ring)" : "none",
                 }}
               >
                 {item.label}
