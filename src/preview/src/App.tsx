@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import { useTheme } from "./theme-provider.tsx";
 
+// Brand showcase
+import { BrandShowcase } from "./showcases/brand.tsx";
+
 // Single-component showcases
 import { ButtonsShowcase } from "./showcases/buttons.tsx";
 import { CardsShowcase } from "./showcases/cards.tsx";
@@ -52,6 +55,15 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
+  // ── Brand ──
+  {
+    id: "brand",
+    label: "Brand",
+    group: "Brand",
+    description: "Brand identity — essence, logo, color, typography, spacing, and voice",
+    component: BrandShowcase,
+  },
+
   // ── Theme ──
   {
     id: "colors",
@@ -397,7 +409,7 @@ const navItems: NavItem[] = [
 
 export function App() {
   const { theme, isDark, toggleDark } = useTheme();
-  const [activeId, setActiveId] = useState("colors");
+  const [activeId, setActiveId] = useState("brand");
 
   const active = navItems.find((item) => item.id === activeId) ?? navItems[0];
   const ActiveComponent = active.component;
